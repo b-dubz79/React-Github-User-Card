@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios'
+import FollowersList from './FollowersList'
+import UserCard from './UserCard'
 
 class App extends React.Component {
   constructor() {
@@ -11,14 +14,23 @@ class App extends React.Component {
   }
 
 componentDidMount() {
-  axios.get('https://api.github.com/users/')
+  axios.get('https://api.github.com/users/b-dubz79')
+  .then(response=>{
+    this.setState({
+      userInfo: response.data
+    })
+  })
+
 }
 
+
   render() {
-    <div>
-      <UserCard />
-      <FollowerList />
+    return(
+    <div className='mainContainer'>
+      <UserCard userInfo={this.state.userInfo}/>
+      <FollowersList />
     </div>
+    )
   }
   
 }
